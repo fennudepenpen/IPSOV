@@ -184,14 +184,14 @@ summary(coxph(Surv(os,death)~index,data=subset(covar,platform=="ABI Human Genome
 
 
 
-summary(coxph(Surv(os,death)~index+stage+grade+Debulk,data=subset(covar,platform=="[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array")))
+summary(coxph(Surv(os,death)~index+stage+grade+Debulk+as.factor(study),data=subset(covar,platform=="[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array")))
 
 sapply(split(covar$index,covar$platform),median)
 
 covar$index_d = ifelse(covar$index<=-0.23,1,2)
 
 summary(coxph(Surv(os,death)~index_d,data=subset(covar,platform=="TCGA")))
-summary(coxph(Surv(os,death)~index_d+age+stage+Debulk+grade,data=subset(covar,platform=="TCGA")))
+summary(coxph(Surv(os,death)~index_d+age+stage+Debulk+grade+as.factor(study),data=subset(covar,platform=="TCGA")))
 
 pdf("./plotnew/km-training.pdf",width=8,height = 8)
 covar1 = subset(covar,platform=="TCGA")
@@ -203,7 +203,7 @@ dev.off()
 
 
 summary(coxph(Surv(os,death)~index_d,data=subset(covar,platform=="[HG-U133A] Affymetrix Human Genome U133A Array")))
-summary(coxph(Surv(os,death)~index_d+stage+Debulk+grade,data=subset(covar,platform=="[HG-U133A] Affymetrix Human Genome U133A Array")))
+summary(coxph(Surv(os,death)~index_d+stage+Debulk+grade+as.factor(study),data=subset(covar,platform=="[HG-U133A] Affymetrix Human Genome U133A Array")))
 
 pdf("./plotnew/km-v1.pdf",width=8,height = 8)
 covar1 = subset(covar,platform=="[HG-U133A] Affymetrix Human Genome U133A Array")
@@ -214,7 +214,7 @@ dev.off()
 
 
 summary(coxph(Surv(os,death)~index_d,data=subset(covar,platform=="[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array")))
-summary(coxph(Surv(os,death)~index_d+stage+Debulk+grade,data=subset(covar,platform=="[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array")))
+summary(coxph(Surv(os,death)~index_d+stage+Debulk+grade+as.factor(study),data=subset(covar,platform=="[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array")))
 
 pdf("./plotnew/km-v2.pdf",width=8,height = 8)
 covar1 = subset(covar,platform=="[HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array")
@@ -224,7 +224,7 @@ ggsurvplot_adjust(data=covar1,time = "os",event = "death",marker = "index_d"
 dev.off()
 
 summary(coxph(Surv(os,death)~index_d,data=subset(covar,platform=="Agilent-014850 Whole Human Genome Microarray 4x44K G4112F (Probe Name version)")))
-summary(coxph(Surv(os,death)~index_d+stage+Debulk+grade,data=subset(covar,platform=="Agilent-014850 Whole Human Genome Microarray 4x44K G4112F (Probe Name version)")))
+summary(coxph(Surv(os,death)~index_d+stage+Debulk+grade+as.factor(study),data=subset(covar,platform=="Agilent-014850 Whole Human Genome Microarray 4x44K G4112F (Probe Name version)")))
 
 pdf("./plotnew/km-v3.pdf",width=8,height = 8)
 covar1 = subset(covar,platform=="Agilent-014850 Whole Human Genome Microarray 4x44K G4112F (Probe Name version)")
